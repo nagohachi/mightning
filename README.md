@@ -1,7 +1,7 @@
 # Mightning
 Minimal [Lightning](https://lightning.ai/)-like PyTorch wrapper for single-node multi-gpu training, implemented with pure distributed dataparallel
 
-# Feature
+## Features
 - Single-node, multi-GPU distributed dataparallel
 - W&b logging of loss, metric values
 - Saving checkpoints according to metrics
@@ -29,7 +29,7 @@ Minimal [Lightning](https://lightning.ai/)-like PyTorch wrapper for single-node 
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | ResNet50 | [MNIST](https://pytorch.org/vision/main/generated/torchvision.datasets.MNIST.html) | Accuracy | 98.57 | - | `./examples/resnet/train.sh` | trained on 4 * RTX4090 |
 
-## ToDo
+## Todos
 - [ ] Support 1 GPU, batch_size 1 inference in `Trainer.test`, while train on more than 1 GPUs
 - [ ] Support running ddp without `torchrun`
 - [ ] Support `Tensorboard` logger
