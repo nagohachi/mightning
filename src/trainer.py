@@ -13,18 +13,17 @@ from torch.utils.data.distributed import DistributedSampler
 from tqdm.auto import tqdm
 from transformers.feature_extraction_utils import BatchFeature
 
-from mightning.loggers import BaseLogger
-from mightning.mixins.mixin_loggers import LoggersMixin
-from mightning.mixins.mixin_samplers import SamplersMixin
-from mightning.mixins.mixin_seed import FixSeedMixin
-from mightning.model_checkpoints import ModelCheckpoint
-from mightning.modules import MightningModule
+from src.loggers import BaseLogger
+from src.mixins.mixin_loggers import LoggersMixin
+from src.mixins.mixin_samplers import SamplersMixin
+from src.mixins.mixin_seed import FixSeedMixin
+from src.model_checkpoints import ModelCheckpoint
+from src.modules import MightningModule
 
 
 class Trainer(LoggersMixin, SamplersMixin, FixSeedMixin):
     def __init__(
         self,
-        hyper_parameters: dict,
         loggers: list[BaseLogger] | BaseLogger,
         ckpt_dir: str | Path,
         max_epochs: int,
@@ -37,7 +36,7 @@ class Trainer(LoggersMixin, SamplersMixin, FixSeedMixin):
         """custom trainer.
 
         Args:
-            hyper_parameters (dict): Hyper parameters. e.g. {"max_epochs": 10, "lr": 1e-3}
+            hyper_parameters (dict | None): Hyper parameters.
             loggers (list[BaseLogger] | BaseLogger): Instance of logger or list of loggers
             ckpt_dir (str | Path): Directory to save checkpoints and logs
             max_epochs (int): Number of maximum epochs
@@ -46,7 +45,6 @@ class Trainer(LoggersMixin, SamplersMixin, FixSeedMixin):
             precision (Literal["16-mixed"], optional): Automatic Mixed Precision strategy. Defaults to None.
             fix_seed (bool, optional): Whether to fix seed. Defaults to True.
         """
-        self.hyper_parameters = hyper_parameters
         self.loggers = loggers if isinstance(loggers, list) else [loggers]
         self.ckpt_dir = Path(ckpt_dir)
         self.max_epochs = max_epochs
