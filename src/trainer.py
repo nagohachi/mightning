@@ -108,8 +108,6 @@ class Trainer(LoggersMixin, SamplersMixin, FixSeedMixin):
 
         if self.fix_seed:
             self.seed_everything(42)
-            self.fix_seed(42)
-            self.seed_everything(42)
 
         if self.strategy == "ddp_nccl":
             train_sampler = DistributedSampler(
