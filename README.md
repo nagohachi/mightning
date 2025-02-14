@@ -3,7 +3,7 @@ Minimal [Lightning](https://lightning.ai/)-like PyTorch wrapper for single-node 
 
 ## Features
 - Single-node, multi-GPU distributed dataparallel
-- W&b logging of loss, metric values
+- W&B logging of loss, metric values
 - Saving checkpoints according to metrics
 - 16-bit mixed precision
 
