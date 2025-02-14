@@ -1,0 +1,44 @@
+[project]
+name = "mightning"
+version = "0.1.0"
+description = "Minimal Lightning-like distributed dataparallel wrapper for PyTorch."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+cpu = ["torch>=2.0.0", "torchvision>=0.15.0", "torchaudio>=2.0.0"]
+cu118 = ["torch>=2.0.0", "torchvision>=0.15.0", "torchaudio>=2.0.0"]
+cu124 = ["torch>=2.0.0", "torchvision>=0.15.0", "torchaudio>=2.0.0"]
+
+[tool.uv]
+conflicts = [
+    [
+        { extra = "cu118" },
+        { extra = "cu124" },
+        { extra = "cpu" },
+    ],
+]
+
+[tool.uv.sources]
+torch = [
+    { index = "torch-cu118", extra = "cu118" },
+    { index = "torch-cpu", extra = "cpu" },
+]
+torchaudio = [
+    { index = "torch-cu118", extra = "cu118" },
+    { index = "torch-cpu", extra = "cpu" },
+]
+
+[[tool.uv.index]]
+name = "torch-cu118"
+url = "https://download.pytorch.org/whl/cu118"
+explicit = true
+
+[[tool.uv.index]]
+name = "torch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
