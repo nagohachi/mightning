@@ -22,3 +22,8 @@ Minimal [Lightning](https://lightning.ai/)-like PyTorch wrapper for single-node 
     ```
     uv sync --extra cu124
     ```
+
+## Examples
+| Model | Data | Metric | Dev | Test | Command | Remarks |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| ResNet50 | [MNIST](https://pytorch.org/vision/main/generated/torchvision.datasets.MNIST.html) | Accuracy | 98.57 | - | `./examples/train.sh` | trained on 4 * RTX4090 |
