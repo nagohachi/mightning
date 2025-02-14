@@ -30,7 +30,7 @@ Minimal [Lightning](https://lightning.ai/)-like PyTorch wrapper for single-node 
 | ResNet50 | [MNIST](https://pytorch.org/vision/main/generated/torchvision.datasets.MNIST.html) | Accuracy | 98.57 | - | `./examples/resnet/train.sh` | trained on 4 * RTX4090 |
 
 ## ToDo
-- [ ] Support 1 GPU, batch_size 1 inference in `Trainer.test`
+- [ ] Support 1 GPU, batch_size 1 inference in `Trainer.test`, while train on more than 1 GPUs
 - [ ] Support running ddp without `torchrun`
 - [ ] Support `Tensorboard` logger
 - [ ] Support multi-node
