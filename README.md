@@ -1,5 +1,5 @@
 # Mightning
-Minimal Lightning-like distributed dataparallel wrapper for PyTorch.
+Minimal [Lightning](https://lightning.ai/)-like PyTorch wrapper for single-node multi-gpu training, implemented with pure distributed dataparallel
 
 # Feature
 - Single-node, multi-GPU distributed dataparallel
