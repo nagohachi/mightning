@@ -6,7 +6,7 @@ import torch
 
 
 class FixSeedMixin:
-    def _fix_seed(self, seed: int) -> None:
+    def seed_everything(self, seed: int) -> None:
         os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
         torch.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)

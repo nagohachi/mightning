@@ -3,6 +3,7 @@ from pathlib import Path
 
 import torch
 from examples.resnet.module import MightningResNet
+from src.mixins.mixin_seed import FixSeedMixin
 from src.model_checkpoints import ModelCheckpoint
 from src.trainer import Trainer
 from src.loggers import WandbLogger
@@ -16,21 +17,21 @@ def retrieve_dataloaders(
     total_train_batch_size: int,
     dataset_root: str | Path = ".",
 ) -> tuple[DataLoader, DataLoader]:
-    """_summary_
+    """get train & dev dataloaders
 
     Parameters
     ----------
     total_dev_batch_size : int
-        _description_
+        dev batch_size (on all GPUs)
     total_train_batch_size : int
-        _description_
+        train batch_size (on all GPUs)
     dataset_root : str | Path, optional
-        _description_, by default "."
+        dataset to download MNIST, by default "."
 
     Returns
     -------
     tuple[DataLoader, DataLoader]
-        _description_
+        (train_dataloader, dev_dataloader)
     """
     dataset_train = torchvision.datasets.MNIST(
         root=dataset_root, train=True, download=True, transform=transforms.ToTensor()
@@ -52,7 +53,7 @@ def retrieve_dataloaders(
         shuffle=True,
         collate_fn=collate_fn,
     )
-    dev_dataloader = DataLoader(dataset=dataset_dev, batch_size=total_train_batch_size)
+    dev_dataloader = DataLoader(dataset=dataset_dev, batch_size=total_dev_batch_size)
 
     return train_dataloader, dev_dataloader
 
@@ -69,6 +70,8 @@ def main() -> None:
     args = parser.parse_args()
 
     resnet_module = MightningResNet(args.model_type, in_chans=1, num_classes=10)
+
+    FixSeedMixin().fix_seed(seed=42)
 
     train_dataloader, dev_dataloder = retrieve_dataloaders(
         total_train_batch_size=args.total_train_batch_size,
