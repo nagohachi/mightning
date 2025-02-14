@@ -71,7 +71,7 @@ def main() -> None:
 
     resnet_module = MightningResNet(args.model_type, in_chans=1, num_classes=10)
 
-    FixSeedMixin().fix_seed(seed=42)
+    FixSeedMixin().seed_everything(seed=42)
 
     train_dataloader, dev_dataloder = retrieve_dataloaders(
         total_train_batch_size=args.total_train_batch_size,
